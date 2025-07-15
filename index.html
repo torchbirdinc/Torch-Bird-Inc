@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torch Bird Inc. – Fueling Flavor. Scaling Impact.</title>
+  <meta name="description" content="Torch Bird Inc. – New Jersey–based franchisee of Hangry Joe's Hot Chicken, delivering premium food‑service, branded merchandise, and digital loyalty experiences." />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-red: #dc2626;
+      --primary-red-dark: #b91c1c;
+      --primary-red-light: #ef4444;
+      --accent-gold: #f59e0b;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --surface-light: #f9fafb;
+      --surface-white: #ffffff;
+    }
+
+    body { 
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .font-display { font-family: 'Playfair Display', serif; }
+
+    .bg-hero {
+      background-image: linear-gradient(135deg, rgba(220,38,38,0.8) 0%, rgba(185,28,28,0.9) 100%), url('https://images.unsplash.com/photo-1601924709551-3b1aa991b40b?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .glass-effect {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-red), var(--primary-red-dark));
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+    }
+
+    .section-padding {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero-animation {
+      animation: fadeInUp 1s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stagger-animation {
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .stagger-animation:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-animation:nth-child(2) { animation-delay: 0.2s; }
+    .stagger-animation:nth-child(3) { animation-delay: 0.3s; }
+    .stagger-animation:nth-child(4) { animation-delay: 0.4s; }
+    .stagger-animation:nth-child(5) { animation-delay: 0.5s; }
+    .stagger-animation:nth-child(6) { animation-delay: 0.6s; }
+
+    .service-icon {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--primary-red), var(--accent-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .parallax-element {
+      transform: translateY(var(--scroll-offset, 0));
+    }
+  </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full z-50 glass-effect">
+    <div class="max-w-7xl mx-auto flex items-center justify-between py-4 px-6 lg:px-8">
+      <a href="#" class="text-2xl font-bold font-display gradient-text">Torch Bird Inc.</a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="#about" class="hover:text-red-600 transition-colors duration-200 relative group">
+          About
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#services" class="hover:text-red-600 transition-colors duration-200 relative group">
+          Services
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#mission" class="hover:text-red-600 transition-colors duration-200 relative group">
+          Mission
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#contact" class="hover:text-red-600 transition-colors duration-200 relative group">
+          Contact
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden p-2" id="mobile-menu-btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu md:hidden fixed top-0 right-0 w-full h-screen bg-white z-40" id="mobile-menu">
+      <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl font-medium">
+        <a href="#about" class="hover:text-red-600 transition-colors duration-200">About</a>
+        <a href="#services" class="hover:text-red-600 transition-colors duration-200">Services</a>
+        <a href="#mission" class="hover:text-red-600 transition-colors duration-200">Mission</a>
+        <a href="#contact" class="hover:text-red-600 transition-colors duration-200">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-hero text-white min-h-screen flex items-center justify-center relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-red-600/20 to-red-900/40"></div>
+    <div class="max-w-6xl mx-auto text-center px-6 relative z-10">
+      <div class="hero-animation">
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-tight">
+          Fueling Flavor.<br class="hidden md:block" />
+          <span class="text-amber-300">Scaling Impact.</span>
+        </h1>
+        <p class="mb-12 text-xl md:text-2xl font-light max-w-3xl mx-auto leading-relaxed">
+          Franchise Operations • Premium Food Service • E‑Commerce Innovation • Digital Loyalty Solutions
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a href="#services" class="btn-primary px-8 py-4 rounded-full text-white font-semibold shadow-lg text-lg">
+            Explore Our Brands
+          </a>
+          <a href="#contact" class="bg-white/10 hover:bg-white/20 px-8 py-4 rounded-full text-white font-semibold shadow-lg border border-white/30 text-lg transition-all duration-300">
+            Partnership Opportunities
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section-padding bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">Who We Are</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-amber-500 mx-auto mb-8"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-in">
+          <p class="text-lg leading-relaxed mb-6 text-gray-700">
+            Torch Bird Inc. is a dynamic food‑service enterprise headquartered in <strong class="text-red-600">New Jersey, USA</strong>, serving as the strategic holding and operational backbone for our rapidly expanding restaurant franchises and innovative digital ventures.
+          </p>
+          <p class="text-lg leading-relaxed mb-6 text-gray-700">
+            As proud franchisees of <strong class="text-red-600">Hangry Joe's Hot Chicken</strong>, we deliver authentic Nashville‑style heat and hospitality to communities across the tri-state area. Our commitment extends far beyond the storefront.
+          </p>
+          <p class="text-lg leading-relaxed text-gray-700">
+            Our dedicated team develops comprehensive e‑commerce solutions, premium branded merchandise, and cutting-edge digital loyalty platforms, fostering deeper connections with our community and creating value for our B2B partners.
+          </p>
+        </div>
+        
+        <div class="fade-in">
+          <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="text-center">
+                <div class="text-3xl font-bold text-red-600 mb-2">5+</div>
+                <div class="text-sm text-gray-600">Active Locations</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-red-600 mb-2">2019</div>
+                <div class="text-sm text-gray-600">Founded</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-red-600 mb-2">50+</div>
+                <div class="text-sm text-gray-600">Team Members</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-bold text-red-600 mb-2">NJ</div>
+                <div class="text-sm text-gray-600">Headquarters</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section-padding bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">What We Do</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-amber-500 mx-auto mb-8"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          From franchise operations to digital innovation, we deliver comprehensive solutions that drive growth and create lasting value.
+        </p>
+      </div>
+      
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Franchise Operations -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">🍗</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">Franchise Operations</h3>
+          <p class="text-gray-600 leading-relaxed">
+            We operate premium Hangry Joe's Hot Chicken locations throughout New Jersey, delivering crispy, spicy, flavor‑packed experiences. Our unwavering focus on operational excellence, food quality, and memorable guest experiences sets us apart.
+          </p>
+        </div>
+
+        <!-- Brand Merchandise -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">👕</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">Brand Merchandise</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Launching soon: exclusive apparel collections, premium kitchenware, and lifestyle accessories under both Torch Bird and Hangry Joe's brands — enabling fans to wear the heat with pride and style.
+          </p>
+        </div>
+
+        <!-- Digital Products & Loyalty -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">📲</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">Digital Innovation</h3>
+          <p class="text-gray-600 leading-relaxed">
+            From comprehensive recipe platforms to our upcoming loyalty application and digital rewards system, we build sophisticated platforms that engage customers and drive retention beyond the restaurant experience.
+          </p>
+        </div>
+
+        <!-- B2B & Catering -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">🚚</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">B2B & Catering</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Corporate events, executive catering, and bulk supply solutions — we deliver scalable B2B services while maintaining Hangry Joe's signature flavor profiles and service speed excellence.
+          </p>
+        </div>
+
+        <!-- Community & Culture -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">🤝</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">Community Impact</h3>
+          <p class="text-gray-600 leading-relaxed">
+            We forge meaningful partnerships with local organizations and culinary creators, championing diversity, inclusion, and gastronomic creativity in every market we serve.
+          </p>
+        </div>
+
+        <!-- Growth & Expansion -->
+        <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100 card-hover stagger-animation">
+          <div class="service-icon mb-6">📈</div>
+          <h3 class="text-2xl font-display font-semibold mb-4 text-gray-900">Strategic Growth</h3>
+          <p class="text-gray-600 leading-relaxed">
+            With strategic locations across New Jersey and ambitious expansion plans throughout the Northeast corridor, we actively seek qualified partners and franchise opportunities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section id="mission" class="section-padding bg-gradient-to-br from-red-50 to-amber-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12 fade-in">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">Our Mission & Values</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-amber-500 mx-auto mb-8"></div>
+      </div>
+      
+      <div class="bg-white rounded-3xl shadow-2xl p-12 border border-gray-100 fade-in">
+        <p class="text-xl leading-relaxed text-center text-gray-700 mb-8">
+          Torch Bird exists to <strong class="text-red-600">scale bold brands</strong> that unite communities through exceptional food, continuous innovation, and vibrant culture. We champion uncompromising quality, creative excellence, and community engagement.
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-8 mt-12">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-red-600">🎯</span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Excellence</h3>
+            <p class="text-gray-600">Operational precision and uncompromising quality standards</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-red-600">🌱</span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Sustainability</h3>
+            <p class="text-gray-600">Environmentally conscious practices and responsible sourcing</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl text-red-600">❤️</span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Community</h3>
+            <p class="text-gray-600">Building lasting relationships founded on trust and value</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="section-padding bg-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <div class="fade-in">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 gradient-text">Where We Operate</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-amber-500 mx-auto mb-8"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          Headquartered in <strong class="text-red-600">Wenonah, New Jersey</strong>, we proudly serve the tri‑state area with strategic expansion plans throughout the Northeast corridor. Join us as we bring authentic Nashville heat to new communities.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section-padding bg-gradient-to-br from-red-600 to-red-800 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-red-600/95 to-red-800/95"></div>
+    <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+      <div class="fade-in">
+        <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">Let's Build Something Great</h2>
+        <div class="w-24 h-1 bg-white/30 mx-auto mb-8"></div>
+        <p class="mb-12 text-xl leading-relaxed max-w-3xl mx-auto">
+          Interested in strategic partnerships, franchise opportunities, or our upcoming merchandise collections? We'd love to connect and explore how we can work together.
+        </p>
+        
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+            <div class="text-3xl mb-4">📧</div>
+            <h3 class="text-lg font-semibold mb-2">Email Us</h3>
+            <a href="mailto:waqararshad78@gmail.com" class="text-amber-300 hover:text-white transition-colors duration-200 font-medium">
+              waqararshad78@gmail.com
+            </a>
+          </div>
+          
+          <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+            <div class="text-3xl mb-4">📞</div>
+            <h3 class="text-lg font-semibold mb-2">Call Us</h3>
+            <a href="tel:+16466624504" class="text-amber-300 hover:text-white transition-colors duration-200 font-medium">
+              +1 646 662 4504
+            </a>
+          </div>
+          
+          <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/20">
+            <div class="text-3xl mb-4">📍</div>
+            <h3 class="text-lg font-semibold mb-2">Visit Us</h3>
+            <p class="text-gray-200">222 Ogden Station Rd<br>Wenonah, NJ 08090</p>
+          </div>
+        </div>
+        
+        <div class="mt-12 bg-white/10 rounded-2xl p-8 backdrop-blur-sm border border-white/20 max-w-md mx-auto">
+          <h3 class="text-xl font-semibold mb-4 text-center">Director</h3>
+          <div class="text-center">
+            <p class="text-lg font-medium mb-2">Waqar ul Hassan</p>
+            <p class="text-amber-300">Director & Founder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-gray-900 text-gray-300">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-display font-bold gradient-text">Torch Bird Inc.</a>
+          <p class="mt-2 text-gray-400">Fueling Flavor. Scaling Impact.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+          <p class="text-sm">© 2025 Torch Bird Inc. All rights reserved.</p>
+          <div class="flex space-x-6 text-sm">
+            <a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors duration-200">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking on links
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Header background on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+      }
+    });
+
+    // Parallax effect for hero section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.parallax-element');
+      
+      parallaxElements.forEach(element => {
+        const speed = element.dataset.speed || 0.5;
+        const yPos = -(scrolled * speed);
+        element.style.setProperty('--scroll-offset', `${yPos}px`);
+      });
+    });
+  </script>
+</body>
+</html>
